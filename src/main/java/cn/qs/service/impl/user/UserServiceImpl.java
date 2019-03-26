@@ -3,6 +3,7 @@ package cn.qs.service.impl.user;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import cn.qs.bean.user.UserExample;
 import cn.qs.bean.user.UserExample.Criteria;
 import cn.qs.mapper.user.UserMapper;
 import cn.qs.service.user.UserService;
+import cn.qs.utils.MD5Util;
 
 @Service
 @Transactional
@@ -57,6 +59,21 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void updateUser(User user) {
 		userMapper.updateByPrimaryKeySelective(user);
+	}
+
+	@Override
+	public User getUserByUserNameAndPassword(String username, String password) {
+		UserExample userExample = new UserExample();
+		Criteria createCriteria = userExample.createCriteria();
+		createCriteria.andUsernameEqualTo(username);
+		createCriteria.andPasswordEqualTo(MD5Util.md5(password, ""));
+
+		List<User> selectByExample = userMapper.selectByExample(userExample);
+		if (CollectionUtils.isNotEmpty(selectByExample)) {
+			return selectByExample.get(0);
+		}
+
+		return null;
 	}
 
 }

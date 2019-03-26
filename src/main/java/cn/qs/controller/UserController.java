@@ -1,6 +1,5 @@
 package cn.qs.controller;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +22,7 @@ import cn.qs.bean.user.User;
 import cn.qs.service.user.UserService;
 import cn.qs.utils.DefaultValue;
 import cn.qs.utils.JSONResultUtil;
+import cn.qs.utils.MD5Util;
 import cn.qs.utils.ValidateCheck;
 
 @Controller /** 自动返回的是json格式数据 ***/
@@ -45,6 +45,7 @@ public class UserController {
 	@ResponseBody
 	public JSONResultUtil addUser(User user) {
 		user.setCreatetime(new Date());
+		user.setPassword(MD5Util.md5(user.getPassword(), ""));// md5加密密码
 		logger.info("user -> {}", user);
 		userService.addUser(user);
 		return JSONResultUtil.ok();

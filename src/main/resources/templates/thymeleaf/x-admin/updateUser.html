@@ -31,8 +31,8 @@
                   <span class="x-red">*</span>用户全名
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="L_userfullname" name="userfullname" lay-verify="required"
-                  autocomplete="off" class="layui-input" th:value="${user.userfullname}"/>
+                  <input type="text" id="L_userfullname" name="fullname" lay-verify="required"
+                  autocomplete="off" class="layui-input" th:value="${user.fullname}"/>
               </div>
           </div>
           <div class="layui-form-item">
@@ -40,7 +40,7 @@
                   <span class="x-red">*username</span>
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="L_username" name="username" required="" lay-verify="required"
+                  <input type="text" id="L_username" name="username" readonly="readonly" required="" lay-verify="required"
                   autocomplete="off" class="layui-input" th:value="${user.username}"/>
               </div>
               <div class="layui-form-mid layui-word-aux">
@@ -48,24 +48,21 @@
               </div>
           </div>
           <div class="layui-form-item">
-              <label for="L_pass" class="layui-form-label">
-                  <span class="x-red">*</span>密码
+              <label for="L_email" class="layui-form-label">
+                  <span class="x-red"></span>电话
               </label>
               <div class="layui-input-inline">
-                  <input type="password" id="L_password" name="password" required="" lay-verify="required"
-                  autocomplete="off" class="layui-input" th:value="${user.password}"/>
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  6到16个字符
+                  <input type="text" id="L_phone" name="phone" lay-verify="required"
+                  autocomplete="off" class="layui-input" th:value="${user.phone}"/>
               </div>
           </div>
           <div class="layui-form-item">
               <label for="L_email" class="layui-form-label">
-                  <span class="x-red"></span>地址
+                  <span class="x-red"></span>邮箱
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="L_address" name="address" lay-verify="required"
-                  autocomplete="off" class="layui-input" th:value="${user.address}"/>
+                  <input type="text" id="L_phone" name="email" lay-verify="required"
+                  autocomplete="off" class="layui-input" th:value="${user.email}"/>
               </div>
           </div>
           <div class="layui-form-item">

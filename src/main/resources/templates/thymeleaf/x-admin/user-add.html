@@ -28,7 +28,7 @@
                   <span class="x-red">*</span>用户全名
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="L_userfullname" name="userfullname" lay-verify="required"
+                  <input type="text" id="L_userfullname" name="fullname" lay-verify="required"
                   autocomplete="off" class="layui-input"/>
               </div>
           </div>
@@ -58,10 +58,19 @@
           </div>
           <div class="layui-form-item">
               <label for="L_email" class="layui-form-label">
-                  <span class="x-red"></span>地址
+                  <span class="x-red"></span>电话
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="L_address" name="address" lay-verify="required"
+                  <input type="text" id="L_phone" name="phone" lay-verify="required"
+                  autocomplete="off" class="layui-input"/>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="L_email" class="layui-form-label">
+                  <span class="x-red"></span>邮箱
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="L_email" name="email" lay-verify="email"
                   autocomplete="off" class="layui-input"/>
               </div>
           </div>

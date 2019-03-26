@@ -12,8 +12,8 @@
     </head>
     <body>
     <div class="x-body layui-anim layui-anim-up">
-        <blockquote class="layui-elem-quote">欢迎管理员：
-            <span class="x-red">admin</span>！</blockquote>
+        <blockquote class="layui-elem-quote">欢迎您：
+            <span class="x-red" th:text="${session.user.fullname}">admin</span>！</blockquote>
         <fieldset class="layui-elem-field">
             <legend>开发团队</legend>
             <div class="layui-field-box">
