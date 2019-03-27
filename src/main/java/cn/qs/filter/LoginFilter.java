@@ -44,6 +44,13 @@ public class LoginFilter implements Filter {
 			chain.doFilter(request, response); // 放行
 			return;
 		}
+
+		String from = request.getParameter("from");
+		if ("register".equals(from) || path.contains("addUser.html")) {
+			chain.doFilter(request, response); // 放行
+			return;
+		}
+
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpSession session = req.getSession();
 		User user = (User) session.getAttribute("user");

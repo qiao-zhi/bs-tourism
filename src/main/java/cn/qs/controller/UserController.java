@@ -44,6 +44,11 @@ public class UserController {
 	@RequestMapping("addUser")
 	@ResponseBody
 	public JSONResultUtil addUser(User user) {
+		User findUser = userService.findUserByUsername(user.getUsername());
+		if (findUser != null) {
+			return JSONResultUtil.error("用户已经存在");
+		}
+
 		user.setCreatetime(new Date());
 		user.setPassword(MD5Util.md5(user.getPassword(), ""));// md5加密密码
 		logger.info("user -> {}", user);
