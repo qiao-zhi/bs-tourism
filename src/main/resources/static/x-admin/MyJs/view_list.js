@@ -33,6 +33,9 @@ function showUsersTable(pageInfo){
             +'<td>'+replaceNull(users[i].viewname)+'</td>'
             +'<td>'+replaceNull(users[i].type)+'</td>'
             +'<td>'+replaceNull(users[i].introduction)+'</td>'
+            +'<td>'
+            +'<a href=javascript:void(0) title="点击查看景点图片" onclick="showPicture('+users[i].id+')">'+replaceNull(users[i].pictureNum)+'</a>'
+            +'</td>'
             +'<td>'+replaceNull(users[i].remark)+'</td>'
             +'<td>'+replaceNull(users[i].ticket)+'</td>'
             +'<td>'+replaceNull(users[i].createtime)+'</td>'
@@ -117,5 +120,10 @@ function deleteUser(id){
 
 function updateUser(id){
 	var url = 'updateView.html?id='+id;
+	x_admin_show('修改景点',url,600,400);
+}
+
+function showPicture(id){
+	var url =  '/picture/showPicture.html?viewId='+id;
 	x_admin_show('修改景点',url,600,400);
 }

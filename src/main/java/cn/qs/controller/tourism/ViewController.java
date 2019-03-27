@@ -1,4 +1,4 @@
-package cn.qs.controller;
+package cn.qs.controller.tourism;
 
 import java.util.ArrayList;
 import java.util.Date;
