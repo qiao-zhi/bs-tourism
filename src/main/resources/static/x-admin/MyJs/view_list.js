@@ -33,15 +33,14 @@ function showUsersTable(pageInfo){
             +'<td>'+replaceNull(users[i].viewname)+'</td>'
             +'<td>'+replaceNull(users[i].type)+'</td>'
             +'<td>'+replaceNull(users[i].introduction)+'</td>'
-            +'<td>'
-            +'<a href=javascript:void(0) title="点击查看景点图片" onclick="showPicture('+users[i].id+')">'+replaceNull(users[i].pictureNum)+'</a>'
-            +'</td>'
+            +'<td>'+replaceNull(users[i].pictureNum)+'</td>'
             +'<td>'+replaceNull(users[i].remark)+'</td>'
             +'<td>'+replaceNull(users[i].ticket)+'</td>'
             +'<td>'+replaceNull(users[i].createtime)+'</td>'
             +'<td>'
             +'<a href=javascript:void(0) title="点击修改景点" onclick="updateUser('+users[i].id+')"><i class="layui-icon">&#xe642;</i></a>'
             +'<a href=javascript:void(0) title="点击删除该景点" onclick="deleteUser('+users[i].id+')"><i class="layui-icon">&#xe640;</i></a>'
+            +'<a href=javascript:void(0) title="点击上传景点图片" onclick="showPicture('+users[i].id+')"><i class="layui-icon">&#xe681;</i></a>'
             +'</td></tr>'
         $("#memberTbody").append(tr);
     }
