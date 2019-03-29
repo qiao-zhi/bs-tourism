@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +19,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import cn.qs.bean.tourism.Comment;
+import cn.qs.bean.tourism.Picture;
 import cn.qs.bean.tourism.View;
-import cn.qs.bean.user.User;
+import cn.qs.service.tourism.CommentService;
+import cn.qs.service.tourism.PictureService;
 import cn.qs.service.tourism.ViewService;
 import cn.qs.utils.DefaultValue;
 import cn.qs.utils.JSONResultUtil;
@@ -33,6 +37,12 @@ public class ViewController {
 
 	@Autowired
 	private ViewService viewService;
+
+	@Autowired
+	private PictureService pictureService;
+
+	@Autowired
+	private CommentService commentService;
 
 	@RequestMapping("/view-list")
 	public String view_list(ModelMap map) {
@@ -57,21 +67,21 @@ public class ViewController {
 
 		return JSONResultUtil.ok();
 	}
-	
+
 	@RequestMapping("deleteView")
 	@ResponseBody
 	public JSONResultUtil deleteView(int id) {
 		viewService.deleteView(id);
 		return JSONResultUtil.ok();
 	}
-	
+
 	@RequestMapping("updateView")
 	public String updateView(int id, ModelMap map) {
 		View view = viewService.getView(id);
 		map.addAttribute("view", view);
 		return "updateView";
 	}
-	
+
 	@RequestMapping("doUpdateView")
 	@ResponseBody
 	public JSONResultUtil doUpdateView(View view) {
@@ -79,10 +89,10 @@ public class ViewController {
 		viewService.updateView(view);
 		return JSONResultUtil.ok();
 	}
-	
+
 	@RequestMapping("/getViews")
 	@ResponseBody
-	public PageInfo<View> getViews(@RequestParam Map condition) {
+	public PageInfo<Map> getViews(@RequestParam Map condition) {
 		int pageNum = 1;
 		if (ValidateCheck.isNotNull(MapUtils.getString(condition, "pageNum"))) { // 如果不为空的话改变当前页号
 			pageNum = Integer.parseInt(MapUtils.getString(condition, "pageNum"));
@@ -93,13 +103,29 @@ public class ViewController {
 		}
 		// 开始分页
 		PageHelper.startPage(pageNum, pageSize);
-		List<View> views = new ArrayList<View>();
+		List<Map> views = new ArrayList<Map>();
 		try {
 			views = viewService.getViews(condition);
 		} catch (Exception e) {
 			logger.error("getUsers error！", e);
 		}
-		PageInfo<View> pageInfo = new PageInfo<View>(views);
+		PageInfo<Map> pageInfo = new PageInfo<Map>(views);
 		return pageInfo;
+	}
+
+	@RequestMapping("/queryViewDetails")
+	public String queryViewDetails(int viewId, ModelMap map) {
+		View view = viewService.getView(viewId);
+		List<Picture> pictures = pictureService.getPicturesByViewId(viewId);
+		List<Comment> commentsByViewId = commentService.getCommentsByViewId(viewId);
+		map.put("view", view);
+		if (CollectionUtils.isNotEmpty(pictures)) {
+			map.put("pictures", pictures);
+		}
+		if (CollectionUtils.isNotEmpty(commentsByViewId)) {
+			map.put("commentsByViewId", commentsByViewId);
+		}
+
+		return "viewDetails";
 	}
 }

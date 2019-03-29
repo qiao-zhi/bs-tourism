@@ -9,7 +9,7 @@ public interface ViewService {
 
 	void addView(View view);
 
-	List<View> getViews(Map condition);
+	List<Map> getViews(Map condition);
 
 	void deleteView(int id);
 

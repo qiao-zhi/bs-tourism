@@ -3,53 +3,53 @@ package cn.qs.bean.tourism;
 import java.util.Date;
 
 public class Comment {
-    private Integer id;
+	private Integer id;
 
-    private Integer userId;
+	private Integer userId;// ===存的是viewID
 
-    private Date createtime;
+	private Date createtime;
 
-    private Date updatetime;
+	private Date updatetime;
 
-    private String content;
+	private String content;
 
-    public Integer getId() {
-        return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Integer getUserId() {
-        return userId;
-    }
+	public Integer getUserId() {
+		return userId;
+	}
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 
-    public Date getCreatetime() {
-        return createtime;
-    }
+	public Date getCreatetime() {
+		return createtime;
+	}
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
-    }
+	public void setCreatetime(Date createtime) {
+		this.createtime = createtime;
+	}
 
-    public Date getUpdatetime() {
-        return updatetime;
-    }
+	public Date getUpdatetime() {
+		return updatetime;
+	}
 
-    public void setUpdatetime(Date updatetime) {
-        this.updatetime = updatetime;
-    }
+	public void setUpdatetime(Date updatetime) {
+		this.updatetime = updatetime;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
+	public void setContent(String content) {
+		this.content = content == null ? null : content.trim();
+	}
 }

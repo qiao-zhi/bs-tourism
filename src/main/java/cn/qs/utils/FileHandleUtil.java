@@ -56,4 +56,9 @@ public class FileHandleUtil {
 
 		return true;
 	}
+
+	public static File getFileByName(String path) {
+		String fileDir = StringUtils.defaultIfBlank(FileHandleUtil.getValue("path", "picture"), "E:/picture/");
+		return new File(fileDir+path);
+	}
 }
