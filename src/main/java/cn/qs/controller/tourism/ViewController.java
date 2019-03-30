@@ -1,5 +1,7 @@
 package cn.qs.controller.tourism;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +46,9 @@ public class ViewController {
 
 	@Autowired
 	private CommentService commentService;
+
+	private String viewName;
+	private String viewType;
 
 	@RequestMapping("/view-list")
 	public String view_list(ModelMap map) {
@@ -101,6 +107,12 @@ public class ViewController {
 		if (ValidateCheck.isNotNull(MapUtils.getString(condition, "pageSize"))) { // 如果不为空的话改变当前页大小
 			pageSize = Integer.parseInt(MapUtils.getString(condition, "pageSize"));
 		}
+		if (StringUtils.isNoneBlank(viewName)) { // 如果不为空的话改变当前页大小
+			condition.put("viewName", viewName);
+		}
+		if (StringUtils.isNoneBlank(viewType)) { // 如果不为空的话改变当前页大小
+			condition.put("viewType", viewType);
+		}
 		// 开始分页
 		PageHelper.startPage(pageNum, pageSize);
 		List<Map> views = new ArrayList<Map>();
@@ -127,5 +139,21 @@ public class ViewController {
 		}
 
 		return "viewDetails";
+	}
+
+	public String getViewName() {
+		return viewName;
+	}
+
+	public void setViewName(String viewName) {
+		this.viewName = viewName;
+	}
+
+	public String getViewType() {
+		return viewType;
+	}
+
+	public void setViewType(String viewType) {
+		this.viewType = viewType;
 	}
 }
