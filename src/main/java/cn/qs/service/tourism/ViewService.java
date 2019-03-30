@@ -17,4 +17,7 @@ public interface ViewService {
 
 	void updateView(View view);
 
+	public View getViewByname(String viewname);
+	
+	public View getViewById(int id);
 }

@@ -3,8 +3,11 @@ package cn.qs.mapper.tourism;
 import cn.qs.bean.tourism.Ticket;
 import cn.qs.bean.tourism.TicketExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface TicketMapper {
     int countByExample(TicketExample example);
 
@@ -27,4 +30,5 @@ public interface TicketMapper {
     int updateByPrimaryKeySelective(Ticket record);
 
     int updateByPrimaryKey(Ticket record);
+    
 }

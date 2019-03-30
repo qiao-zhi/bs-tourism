@@ -58,4 +58,14 @@ public class Index {
 	public String member_add() {
 		return "user-add";
 	}
+	
+	@RequestMapping("/ticket-list")
+	public String ticket_list() {
+		return "ticket-list";
+	}
+	
+	@RequestMapping("/ticket-add")
+	public String ticket_add() {
+		return "ticket-add";
+	}
 }

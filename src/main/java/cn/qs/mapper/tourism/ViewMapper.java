@@ -3,7 +3,6 @@ package cn.qs.mapper.tourism;
 import cn.qs.bean.tourism.View;
 import cn.qs.bean.tourism.ViewExample;
 import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

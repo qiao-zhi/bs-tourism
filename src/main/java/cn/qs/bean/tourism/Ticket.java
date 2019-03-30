@@ -21,7 +21,37 @@ public class Ticket {
 
     private Integer viewId;
 
-    public Integer getId() {
+	private String viewname;
+    
+    private String strStarttime;
+    
+    private String strEndtime;
+    
+    public String getStrStarttime() {
+		return strStarttime;
+	}
+
+	public void setStrStarttime(String strStarttime) {
+		this.strStarttime = strStarttime;
+	}
+
+	public String getStrEndtime() {
+		return strEndtime;
+	}
+
+	public void setStrEndtime(String strEndtime) {
+		this.strEndtime = strEndtime;
+	}
+
+    public String getViewname() {
+		return viewname;
+	}
+
+	public void setViewname(String viewname) {
+		this.viewname = viewname;
+	}
+
+	public Integer getId() {
         return id;
     }
 
