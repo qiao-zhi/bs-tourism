@@ -26,6 +26,6 @@ public class CommentServiceImpl implements CommentService {
 		CommentExample example = new CommentExample();
 		Criteria createCriteria = example.createCriteria();
 		createCriteria.andUserIdEqualTo(viewId);
-		return commentMapper.selectByExample(example);
+		return commentMapper.selectByExampleWithBLOBs(example);
 	}
 }

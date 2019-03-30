@@ -31,17 +31,18 @@ public class CommentController {
 	public JSONResultUtil addComment(Integer viewId, String comment, HttpServletRequest request) {
 		Comment comment2 = new Comment();
 		try {
+
+			HttpSession session = request.getSession();
+			User user = (User) session.getAttribute("user");
+			comment = "[" + user.getFullname() + "]:  " + comment;
+
 			comment2.setContent(comment);
 			comment2.setCreatetime(new Date());
 			comment2.setUserId(viewId);
 
-			HttpSession session = request.getSession();
-			User user = (User) session.getAttribute("user");
-			comment = "[" + user.getFullname() + "]:" + comment;
-
 			commentService.addComment(comment2);
 		} catch (Exception e) {
-			logger.error("addComment error",e);
+			logger.error("addComment error", e);
 			return JSONResultUtil.error("添加评论出错");
 		}
 
