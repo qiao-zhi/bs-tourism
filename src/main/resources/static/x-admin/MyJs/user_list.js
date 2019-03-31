@@ -36,10 +36,13 @@ function showUsersTable(pageInfo){
             +'<td>'+replaceNull(users[i].email)+'</td>'
             +'<td>'+replaceNull(users[i].phone)+'</td>'
             +'<td>'+replaceNull(users[i].createtime)+'</td>'
-            +'<td>'
-            +'<a href=javascript:void(0) title="点击修改用户" onclick="updateUser('+users[i].id+')"><i class="layui-icon">&#xe642;</i></a>'
-            +'<a href=javascript:void(0) title="点击删除该用户" onclick="deleteUser('+users[i].id+')"><i class="layui-icon">&#xe640;</i></a>'
-            +'</td></tr>'
+            +'<td>';
+	        if("undefined" != typeof admin){
+	        	tr+='<a href=javascript:void(0) title="点击修改用户" onclick="updateUser('+users[i].id+')"><i class="layui-icon">&#xe642;</i></a>'
+	        		+'<a href=javascript:void(0) title="点击删除该用户" onclick="deleteUser('+users[i].id+')"><i class="layui-icon">&#xe640;</i></a>'
+	        }
+            
+        	tr +='</td></tr>'
         $("#memberTbody").append(tr);
     }
 

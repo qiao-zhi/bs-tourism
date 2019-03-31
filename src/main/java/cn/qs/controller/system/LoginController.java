@@ -47,6 +47,7 @@ public class LoginController {
 		if (username.equals("admin") && password.equals("admin")) {
 			loginUser = new User();
 			loginUser.setFullname("系统管理员");
+			loginUser.setUsername("admin");
 		} else {
 			loginUser = userService.getUserByUserNameAndPassword(username, password);
 		}

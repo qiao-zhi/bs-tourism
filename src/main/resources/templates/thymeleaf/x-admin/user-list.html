@@ -17,10 +17,12 @@
     <!--自己写的JS  -->
     <script type="text/javascript" th:src="${#httpServletRequest.getContextPath()+'/static/x-admin/MyJs/PublicFunctions.js'}"></script>
     <script type="text/javascript" th:src="${#httpServletRequest.getContextPath()+'/static/x-admin/MyJs/user_list.js'}"></script>
-    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
-	<script>     
-        var contextPath= [[@{/}]]; 
-	</script>
+    
+    <span th:if="${session.user.username} eq 'admin'">
+    	<script>
+    		var admin = true;
+    	</script>
+    </span>
   </head>
   
   <body class="layui-anim layui-anim-up">
@@ -46,7 +48,9 @@
         </form>
       </div>
       <xblock>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','./user-add.html',600,400)"><i class="layui-icon"></i>添加</button>
+     	 <span th:if="${session.user.username} eq 'admin'">
+       		 <button class="layui-btn" onclick="x_admin_show('添加用户','./user-add.html',600,400)"><i class="layui-icon"></i>添加</button>
+        </span>
         <span class="x-right" style="line-height:40px">用户列表</span>
       </xblock>
       <table class="layui-table">

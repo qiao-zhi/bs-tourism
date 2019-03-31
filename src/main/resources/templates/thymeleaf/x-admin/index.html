@@ -17,6 +17,11 @@
     
     <!--自己写的JS  -->
     <script type="text/javascript" th:src="${#httpServletRequest.getContextPath()+'/static/x-admin/MyJs/index.js'}"></script>
+    <span th:if="${session.user.username} eq 'admin'">
+    	<script>
+    		var admin = true;
+    	</script>
+    </span>
 </head>
 <body>
     <!-- 顶部开始 -->
