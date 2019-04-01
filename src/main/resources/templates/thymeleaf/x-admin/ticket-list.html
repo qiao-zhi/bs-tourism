@@ -22,6 +22,11 @@
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
       <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <span th:if="${session.user.username} eq 'admin'">
+    	<script>
+    		var admin = true;
+    	</script>
+    </span>
   </head>
   
   <body class="layui-anim layui-anim-up">
@@ -47,7 +52,9 @@
         </form>
       </div>
       <xblock>
+      <span th:if="${session.user.username} eq 'admin'">
         <button class="layui-btn" onclick="x_admin_show('添加门票','./ticket-add.html',700,400)"><i class="layui-icon"></i>添加</button>
+      </span> 
         <span class="x-right" style="line-height:40px">门票列表</span>
       </xblock>
       <table class="layui-table">

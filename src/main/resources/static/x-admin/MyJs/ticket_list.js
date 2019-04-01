@@ -36,10 +36,15 @@ function showTicketsTable(pageInfo){
             +'<td>'+replaceNull(tickets[i].endtime)+'</td>'
             +'<td>'+replaceNull(tickets[i].ticketNum)+'</td>'
             +'<td>'+replaceNull(tickets[i].createtime)+'</td>'
-            +'<td>'
-            +'<a href=javascript:void(0) title="点击修改门票信息" onclick="updateTicket('+tickets[i].id+')"><i class="layui-icon">&#xe642;</i></a>'
+            +'<td>';
+            if("undefined" != typeof admin){
+            tr+='<a href=javascript:void(0) title="点击修改门票信息" onclick="updateTicket('+tickets[i].id+')"><i class="layui-icon">&#xe642;</i></a>'
             +'<a href=javascript:void(0) title="点击删除该门票信息" onclick="deleteTicket('+tickets[i].id+')"><i class="layui-icon">&#xe640;</i></a>'
-            +'</td></tr>'
+            }else{
+            	tr+='-- --'
+            }
+            tr +='</td></tr>'
+            
         $("#memberTbody").append(tr);
     }
 
