@@ -60,6 +60,8 @@ public class UserServiceImpl implements UserService {
 	public void updateUser(User user) {
 		if (StringUtils.isNotBlank(user.getPassword())) {
 			user.setPassword(MD5Util.md5(user.getPassword(), ""));// md5加密密码
+		} else {
+			user.setPassword(null);
 		}
 
 		userMapper.updateByPrimaryKeySelective(user);
