@@ -1,7 +1,5 @@
 package cn.qs.controller.tourism;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -68,6 +66,7 @@ public class ViewController {
 		try {
 			viewService.addView(view);
 		} catch (Exception e) {
+			logger.error("添加景点出错", e);
 			return JSONResultUtil.error("添加景点出错");
 		}
 
@@ -101,11 +100,11 @@ public class ViewController {
 	public PageInfo<Map> getViews(@RequestParam Map condition) {
 		int pageNum = 1;
 		if (ValidateCheck.isNotNull(MapUtils.getString(condition, "pageNum"))) { // 如果不为空的话改变当前页号
-			pageNum = Integer.parseInt(MapUtils.getString(condition, "pageNum"));
+			pageNum = MapUtils.getInteger(condition, "pageNum");
 		}
 		int pageSize = DefaultValue.PAGE_SIZE;
 		if (ValidateCheck.isNotNull(MapUtils.getString(condition, "pageSize"))) { // 如果不为空的话改变当前页大小
-			pageSize = Integer.parseInt(MapUtils.getString(condition, "pageSize"));
+			pageSize = MapUtils.getInteger(condition, "pageSize");
 		}
 		if (StringUtils.isNoneBlank(viewName)) { // 如果不为空的话改变当前页大小
 			condition.put("viewName", viewName);
@@ -113,6 +112,7 @@ public class ViewController {
 		if (StringUtils.isNoneBlank(viewType)) { // 如果不为空的话改变当前页大小
 			condition.put("viewType", viewType);
 		}
+
 		// 开始分页
 		PageHelper.startPage(pageNum, pageSize);
 		List<Map> views = new ArrayList<Map>();
@@ -122,6 +122,7 @@ public class ViewController {
 			logger.error("getUsers error！", e);
 		}
 		PageInfo<Map> pageInfo = new PageInfo<Map>(views);
+
 		return pageInfo;
 	}
 

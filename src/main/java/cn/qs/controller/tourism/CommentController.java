@@ -31,7 +31,6 @@ public class CommentController {
 	public JSONResultUtil addComment(Integer viewId, String comment, HttpServletRequest request) {
 		Comment comment2 = new Comment();
 		try {
-
 			HttpSession session = request.getSession();
 			User user = (User) session.getAttribute("user");
 			comment = "[" + user.getFullname() + "]:  " + comment;

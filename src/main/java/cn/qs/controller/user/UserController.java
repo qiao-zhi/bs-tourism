@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,12 +74,13 @@ public class UserController {
 	public PageInfo<User> getUsers(@RequestParam Map condition) {
 		int pageNum = 1;
 		if (ValidateCheck.isNotNull(MapUtils.getString(condition, "pageNum"))) { // 如果不为空的话改变当前页号
-			pageNum = Integer.parseInt(MapUtils.getString(condition, "pageNum"));
+			pageNum = MapUtils.getInteger(condition, "pageNum");
 		}
 		int pageSize = DefaultValue.PAGE_SIZE;
 		if (ValidateCheck.isNotNull(MapUtils.getString(condition, "pageSize"))) { // 如果不为空的话改变当前页大小
-			pageSize = Integer.parseInt(MapUtils.getString(condition, "pageSize"));
+			pageSize = MapUtils.getInteger(condition, "pageSize");
 		}
+
 		// 开始分页
 		PageHelper.startPage(pageNum, pageSize);
 		List<User> users = new ArrayList<User>();
@@ -88,6 +90,7 @@ public class UserController {
 			logger.error("getUsers error！", e);
 		}
 		PageInfo<User> pageInfo = new PageInfo<User>(users);
+
 		return pageInfo;
 	}
 
@@ -117,7 +120,7 @@ public class UserController {
 			User user = (User) request.getSession().getAttribute("user");
 			id = user.getId();
 		}
-		
+
 		User user = userService.getUser(id);
 		map.addAttribute("user", user);
 		return "updateUser";

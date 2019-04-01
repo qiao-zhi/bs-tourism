@@ -44,7 +44,7 @@ public class LoginController {
 	@ResponseBody
 	public JSONResultUtil doLogin(String username, String password, HttpSession session) {
 		User loginUser = null;
-		if (username.equals("admin") && password.equals("admin")) {
+		if ("admin".equals(username) && "admin".equals(password)) {
 			loginUser = new User();
 			loginUser.setFullname("系统管理员");
 			loginUser.setUsername("admin");
