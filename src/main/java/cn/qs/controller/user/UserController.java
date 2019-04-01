@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +46,10 @@ public class UserController {
 	@RequestMapping("addUser")
 	@ResponseBody
 	public JSONResultUtil addUser(User user) {
+		if (user != null && "admin".equals(user.getUsername())) {
+			return JSONResultUtil.error("您不能添加管理员用户");
+		}
+
 		User findUser = userService.findUserByUsername(user.getUsername());
 		if (findUser != null) {
 			return JSONResultUtil.error("用户已经存在");
@@ -106,7 +112,12 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("updateUser")
-	public String updateUser(int id, ModelMap map) {
+	public String updateUser(Integer id, String from, ModelMap map, HttpServletRequest request) {
+		if ("personal".equals(from)) {
+			User user = (User) request.getSession().getAttribute("user");
+			id = user.getId();
+		}
+		
 		User user = userService.getUser(id);
 		map.addAttribute("user", user);
 		return "updateUser";
